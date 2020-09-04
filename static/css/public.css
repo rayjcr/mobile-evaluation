@@ -1,0 +1,132 @@
+html, body {
+  font-family: ALIBABA Font,PingFang SC;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+  -webkit-user-select: none; /*webkit浏览器*/
+  -khtml-user-select: none; /*早期浏览器*/
+  -moz-user-select: none; /*火狐*/
+  -ms-user-select: none; /*IE10*/
+  user-select: none;
+}
+
+input, textarea {
+  outline: none;
+  border: none;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  user-select: auto;
+  -webkit-transform: translateZ(0);
+}
+textarea {
+  resize: none;
+}
+
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{
+  color: #b6b8b8;
+}
+.scrollY {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.scrollX {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fl {
+  float: left;
+}
+.fr{
+  float: right;
+}
+.clear {
+  overflow: hidden;
+}
+
+/*按钮背景色+字体颜色*/
+.gray-btn {
+  color: #262627;
+  background-color: #EFF1F3;
+}
+
+.blue-btn {
+  color: #FFFFFF;
+  background-color: #33A5FF;
+}
+
+/*图片预览插件*/
+.slider {
+  z-index: 3005!important;
+}
+
+/*1px*/
+.border1px {
+  border-width: 1px;
+  border-style: solid;
+}
+.border-bottom {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.border-top {
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+.border-right {
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+.line1px {
+  height: 1px;
+}
+.widthLine1px {
+  width: 1px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2.0) {
+  .border1px::after,
+  .border-bottom::after,
+  .border-top::after,
+  .border-right::after,
+  .line1px::after,
+  .widthLine1px::after{
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+}
+
+/* 3倍屏 */
+@media only screen and (-webkit-min-device-pixel-ratio: 3.0) {
+  .border1px::after,
+  .border-bottom::after,
+  .border-top::after,
+  .border-right::after,
+  .line1px::after,
+  .widthLine1px::after{
+    -webkit-transform: scaleY(0.33);
+    transform: scaleY(0.33);
+  }
+}

@@ -1,0 +1,374 @@
+/*---------------------------------------------------------------- 
+// 文件功能描述：自定义播放器
+// author：Inthur
+// 时间：2018/12/01
+// 修改标识： 
+// 修改描述：
+//----------------------------------------------------------------*/
+//宽高
+@mixin elementSize($w,$h){  
+	width: $w;
+	height: $h;
+}
+
+//旋转
+@mixin transformRotate($angle,$x,$y){     
+	transform: rotate($angle);
+	-ms-transform: rotate($angle);		/* IE 9 */
+	-webkit-transform: rotate($angle);	/* Safari and Chrome */
+	-o-transform: rotate($angle);		/* Opera */
+	-moz-transform: rotate($angle);		/* Firefox */
+	transform-origin:$x $y;             //旋转中心
+	-ms-transform-origin:$x $y;
+	-webkit-transform-origin:$x $y;
+	-o-transform-origin:$x $y;
+	-moz-transform-origin:$x $y;
+}
+//flex布局,方向
+@mixin flexBox($dire){       
+	display: box;
+	display:-webkit-box;  /* iOS 6-, Safari 3.1-6 */
+	display:-moz-box;     /* Firefox 19 */
+	display:-ms-flexbox;
+	display:-webkit-flex; /* Chrome */
+	display: flex;
+	-webkit-flex-direction: $dire;
+	flex-direction: $dire;
+	-moz-flex-direction: $dire;
+	-ms-flex-direction: $dire;
+	-o-flex-direction: $dire; 
+}
+// 居中
+@mixin center($p,$t,$l,$x,$y){
+	position: $p;
+	top: $t;
+	left: $l;
+	transform: translate($x,$y);
+	-ms-transform: translate($x,$y);		/* IE 9 */
+	-webkit-transform: translate($x,$y);	/* Safari and Chrome */
+	-o-transform: translate($x,$y);	/* Opera */
+	-moz-transform: translate($x,$y);	/* Firefox */
+}
+// 通用
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    background-size: 100% 100%;
+}
+.clearfix:after{
+    content:"\20";
+    display:block;
+    clear:both;
+}
+.clearfix{
+    *zoom:1;
+}
+a{
+    text-decoration: none;
+}
+button{
+	border:0;
+	background-color:none;
+	outline: none;
+}
+li {
+    list-style: none;
+}
+img {
+    border: 0;
+    vertical-align: bottom; /*图片间隙问题*/
+}
+em,
+i {
+    font-style: normal;
+}
+input,
+textarea {
+    outline: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+h2,h3,h4,h5,h6{
+    font-weight: normal;
+}
+
+// 公用遮罩
+.mask{
+	@include elementSize(100%,100%);
+	background: rgba(0,0,0,.5); 
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 3000;
+}
+// 提示弹层
+.alert-mask-body{
+	@include elementSize(100%,100%);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 3000;
+}
+.alert-mask{
+	@include center(absolute,50%,50%,-50%,-50%);
+	background: rgba(0,0,0,.5);
+	padding: 0.8rem 0.8rem;
+	border-radius: 0.2rem; 
+	color: #fff;
+	font-size: 0.3rem;
+	text-align: center;
+}
+
+//控制栏
+.inc-top-enter-active{
+	-webkit-animation-name: incTop;
+	animation-name:incTop;
+	animation-duration:.5s;
+}
+.inc-top-leave-active{
+	-webkit-animation-name:incDown;
+	animation-name:incDown;
+	animation-duration:.5s;
+}
+//顶部工具栏
+@-webkit-keyframes incTop {
+	from {
+		top:-1.2rem;
+	}
+	to {
+        top:0;
+	}
+} 
+@keyframes incTop {
+	from {
+		top:-1.2rem;
+	}
+	to {
+        top:0;
+	}
+}
+@-webkit-keyframes incDown {
+	from {
+		top:0;
+	}
+	to {
+        top:-1.2rem;
+	}
+} 
+@keyframes incDown {
+	from {
+		top:0;
+	}
+	to {
+        top:-1.2rem;
+	}
+}
+
+//视频结束
+@-webkit-keyframes finishStar {
+	from {
+		@include elementSize(1.146rem,1.04rem);
+	}
+	70%{
+		@include elementSize(6.876rem,6.24rem);
+	}
+	to {
+		@include elementSize(5.73rem,5.2rem);
+	}
+} 
+@keyframes finishStar {
+	from {
+		@include elementSize(1.146rem,1.04rem);
+	}
+	70%{
+		@include elementSize(6.876rem,6.24rem);
+	}
+	to {
+		@include elementSize(5.73rem,5.2rem);
+	}
+}
+	
+//加载动画
+@-webkit-keyframes inLoading {
+	from {
+		@include transformRotate(0deg,50%,50%)
+	}
+	to {
+		@include transformRotate(360deg,50%,50%)
+	}
+} 
+@keyframes inLoading {
+	from {
+		@include transformRotate(0deg,50%,50%)
+	}
+	to {
+		@include transformRotate(360deg,50%,50%)
+	}
+}
+// .player{
+// 	@include elementSize(100%,100%);
+// 	overflow: hidden;
+// }
+.in-chimee-player{
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;/*禁用手机浏览器的用户选择功能 */
+    -webkit-tap-highlight-color: transparent;  /*手机端点击时出现的阴影*/
+    @include elementSize(100%,100%);
+    overflow: hidden;
+    position: relative;
+	background: #000;
+	font-size: 0.24rem;
+    // @include transformRotate(90deg,50%,50%);
+    .player-box{
+        // width: auto; height: 375px;
+        // @include transformRotate(90deg,50%,50%);
+        background:#000;
+        position: absolute;
+        left: 50%; top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .start-tip{
+        @include elementSize(4.4rem,2rem);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -1rem;
+        margin-left: -2.2rem;
+        color: #fff;
+        background: rgba(255,255,255,.1);
+        border-radius: 0.48rem;
+        text-align: center;
+        line-height: 2rem;
+        font-size: 0.28rem;
+	}
+	.in-top-body{
+		position: absolute;
+        top: 0;
+        left: 0;
+		z-index: 800;
+		@include elementSize(100%,1.2rem);
+		overflow: hidden;
+	}
+    .in-top{
+        position: absolute;
+        top: 0;
+        left: 0;
+        // z-index: 800;
+        width: 100%;
+        background: -webkit-linear-gradient(rgba(0,0,0,0.4),rgba(255,255,255,0)); /* Safari 5.1 - 6.0 */
+        background: -o-linear-gradient(rgba(0,0,0,0.4),rgba(255,255,255,0)); /* Opera 11.1 - 12.0 */
+        background: -moz-linear-gradient(rgba(0,0,0,0.4),rgba(255,255,255,0)); /* Firefox 3.6 - 15 */
+        background: linear-gradient(rgba(0,0,0,0.4),rgba(255,255,255,0)); /* 标准的语法 */
+        .in-top-box{
+            padding: 0.3rem 0.32rem;
+        }
+        .in-return{
+            @include elementSize(0.6rem,0.6rem); 
+            background:url('../img/in-return.png') no-repeat 0 center;
+			background-size: 100% 100%;
+        }
+        .in-title{
+            height: 0.6rem;
+            line-height: 0.6rem;
+            font-size: 0.34rem;
+            color: #fff;
+            padding-left: 0.22rem;
+        }
+        .in-nav-list{
+            position: absolute;
+            top: 0.32rem;
+            right: 0.12rem;
+            // z-index: 801;
+            li{
+                float: left;
+                margin-right: 0.2rem;
+                background: rgba(0,0,0,.4) url('../img/star-n.png') no-repeat 0 center;
+                background-size: auto 100%;
+                height: 0.6rem;
+                line-height: 0.6rem;
+                padding: 0 0.24rem 0 0.64rem;
+                border-radius: 0.3rem;
+                color: #fff;
+                font-size: 0.26rem;
+                &.selected{
+                    background-color: #02affe;
+                }
+                &.readed{
+                    background-image: url('../img/star-y.png');
+                }
+            }
+        }
+        .in-opt-list{
+            position: absolute;
+            top: 0.32rem;
+            right: 0.4rem;
+            // z-index: 801;
+            li{
+                float: right;
+                margin: .1rem 0.75rem .1rem 0;
+                background: no-repeat 0 center;
+                background-size: auto 100%;
+                width: .4rem;
+                height: 0.4rem;
+                color: #fff;
+                font-size: 0.26rem;
+                &.share{
+                    background-image: url('../img/share.png');
+                }
+                &.lock{
+                    background-image: url('../img/lock.png');
+                }
+                &.collect{
+                    background-image: url('../img/collect.png');
+                }
+                &.lock.on{
+                    background-image: url('../img/lock_on.png');
+                }
+                &.collect.on{
+                    background-image: url('../img/collect_on.png');
+                }
+            }
+        }
+    }
+    .in-finish{
+        img{
+            @include elementSize(5.73rem,5.2rem);
+            @include center(absolute,50%,50%,-50%,-50%);
+            animation: finishStar 1.5s;
+            -moz-animation: finishStar 1.5s;	/* Firefox */
+            -webkit-animation: finishStar 1.5s;	/* Safari 和 Chrome */
+            -o-animation: finishStar 1.5s;	/* Opera */
+        }
+    }  
+    .in-loading{
+        @include elementSize(0.6rem,0.6rem);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+        margin-left: -0.3rem;
+        margin-top: -0.3rem;
+        background:url('../img/in-loading.png') no-repeat 0 center;
+        background-size: 100% 100%;
+        // @include transformRotate(0deg,50%,50%);
+        animation: inLoading 0.6s linear 0s infinite;
+        -moz-animation: inLoading 0.6s linear 0s infinite;	/* Firefox */
+        -webkit-animation: inLoading 0.6s linear 0s infinite;	/* Safari 和 Chrome */
+        -o-animation: inLoading 0.6s linear 0s infinite;	/* Opera */ 
+    }
+}
+
+
+
+

@@ -1,0 +1,175 @@
+#app {
+  max-width: 1500px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #EFF1F3;
+}
+
+.clearfix:after{
+  content:"\20";
+  display:block;
+  clear:both;
+}
+.clearfix{
+  *zoom:1;
+}
+
+/*toast字体大小*/
+.mint-toast-text {
+  font-size: 30px;
+}
+
+/*msgbox样式*/
+.mint-msgbox-title,
+.mint-msgbox-btn {
+  font-size: 35px !important;
+}
+
+.mint-msgbox-message {
+  font-size: 30px !important;
+}
+
+.mint-msgbox-btns {
+  height: 80px !important;
+  line-height: 80px !important;
+}
+
+#app .mint-popup {
+  width: 100%;
+}
+.mint-popup-bottom {
+  border-radius: 40px 40px 0 0;
+}
+#app .mint-popup-center {
+  width: 94%;
+  max-height: 85%;
+  background-color: #FFFFFF;
+  border-radius: 40px;
+}
+
+/*弹性布局样式*/
+.flex {
+  display: flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-column {
+  flex-direction: column;
+}
+.alignCenter{
+  align-items: center;
+}
+.justifyCenter {
+  justify-content: center;
+}
+.justifyFlexEnd {
+  justify-content: flex-end;
+}
+.justifySpaceBetween {
+  justify-content: space-between;
+}
+.flex_1 {
+  flex: 1;
+  width: 0%;
+}
+
+/*
+**文本超出显示省略号-------start
+*/
+.text-overflow {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.text-overflow-clamp2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 45px;
+  max-height: 90px; // 2行隐藏就两倍，三行隐藏就三倍
+}
+/*
+**文本超出显示省略号--------end
+*/
+
+/*picker选择器样式*/
+.mint-datetime-action ,
+.picker-slot, .van-picker-column{
+  font-size: 30px;
+}
+.mint-datetime-action {
+  color: #34CEAA;
+}
+.picker-toolbar, .mint-datetime-action, .van-picker__toolbar {
+  height: 100px;
+  line-height: 100px;
+  border-bottom: 1px solid #EFF1F3;
+}
+.picker-toolbar .picker-btn,.van-picker__toolbar .van-picker__cancel,.van-picker__toolbar .van-picker__confirm {
+  width: 120px;
+  text-align: center;
+  font-size: 32px;
+}
+.picker-toolbar .picker-cancel,.van-picker__toolbar .van-picker__cancel {
+  color: #B6B8B8;
+}
+.picker-toolbar .picker-sure {
+  color: #33A5FF;
+}
+.picker-toolbar .picker-title,.van-picker__toolbar .van-picker__title {
+  flex: 1;
+  text-align: center;
+  font-size: 33px;
+  font-weight: 500;
+}
+
+//toast
+.mint-toast,.mint-indicator-wrapper {
+  z-index: 3000;
+}
+
+//slide
+.swiper-pagination .swiper-pagination-bullet {
+  width: 24px;
+  height: 24px;
+  transform: scale(0.5);
+  border-radius: 50%;
+}
+.swiper-pagination {
+  text-align: right!important;
+  left: -20px!important;
+}
+
+// switch按钮样式
+.mint-switch-core {
+  width: 100px;
+  height: 44px;
+  border-radius: 22px;
+}
+.mint-switch-core:after, .mint-switch-core:before {
+  top: -2px
+}
+ .mint-switch-core:before {
+  width: 100px;
+  height: 44px;
+  border-radius: 22px;
+}
+.mint-switch-core:after {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.mint-switch-input:checked+.mint-switch-core:after{
+  transform: translateX(56px);
+}
+
+//loading
+.mint-indicator-mask {
+  z-index: 3500;
+}
+
+
+
+
